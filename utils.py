@@ -209,7 +209,9 @@ def get_compactness(
     GFAs = GFAs.groupby(GFAs.index).agg("mean")
     GFAsfirst = area_df[ref_col].loc[~area_df.index.duplicated(keep="first")]
     if not GFAsfirst.equals(GFAs):
-        raise ValueError("the first areas dont match the aggregates!")
+        lg.warning(
+            "the first buidling areas dont match the aggregates for the building!"
+        )
     if len(GFAs) != len(hull_df):
         lg.warning(
             f"The number of rows in hull_df ({len(hull_df)}) and GFAs ({len(GFAs)}) don't match!"
